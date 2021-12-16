@@ -6,6 +6,7 @@ let elAgeINp = document.querySelector(".box__inp-age");
 
 document.querySelector(".box__form").addEventListener("submit", e => {
     e.preventDefault();
+    console.log("sal");
     document.querySelectorAll("label").forEach(label => {
         if(label.id != "target"){
             label.children[0].style.backgroundImage  = "url('../../img/eror-bg.png')";
@@ -84,5 +85,9 @@ function valid(targetInp,valLength,inpBottomTitle){
         inpBottomTitle.style.opacity = "0";
         targetInp.dataset = "target";
         targetInp.parentElement.id = "target";
+    }
+    else{
+        targetInp.style.backgroundImage  = "url('../../img/eror-bg.png')";
+        targetInp.style.borderColor = "red";
     }
 }       
