@@ -22,11 +22,10 @@ document.querySelector(".box__form").addEventListener("submit", e => {
             elPaswConfirm.style.borderColor = "red";   
             elPaswConfirm.style.backgroundImage  = "url('../../img/eror-bg.png')";
             document.querySelector(".check-confirm").style.opacity = "1";
+            if(elPaswConfirm.value.length <= 8){
+                document.querySelector(".check-confirm").style.opacity = "0";
+            }
             elPaswConfirm.addEventListener("keyup", ()=> {
-                if(elPaswInp.value.includes(elPaswConfirm.value)){
-                    document.querySelector(".check-confirm").textContent = "True";
-                    document.querySelector(".check-confirm").style.color = "green";
-                }
                 if(elPaswConfirm.value.length <= 8){
                     document.querySelector(".check-confirm").style.opacity = "0";
                 }
@@ -38,34 +37,41 @@ document.querySelector(".box__form").addEventListener("submit", e => {
 document.querySelectorAll(".box__inp").forEach(inp => {
     inp.addEventListener("focus", inpTarget => {
         inpTarget.target.addEventListener("keyup", item => {    
-            setTimeout(()=> {
-                inpTarget.target.style.backgroundImage  = "url('../../img/eror-bg.png')";
-                inpTarget.target.style.borderColor = "red";
-
-                if(inpTarget.target.id == "fnmae"){
-                    let fnameTitle = document.querySelector(".box__valid-fnmae");
-                    valid(inpTarget.target,5,fnameTitle);
-                }
-                else if(inpTarget.target.id == "lnmae"){
-                    let lnameTitle = document.querySelector(".box__valid-lname");
-                    valid(inpTarget.target,6,lnameTitle);
-                }
-                else if(inpTarget.target.id == "age"){
-                    let ageTitle = document.querySelector(".box__valid--age");
-                    valid(inpTarget.target,2,ageTitle);
-                }
-                else if(inpTarget.target.id == "pasw"){
-                    let inpTitle = document.querySelector(".box__valid--pasw");
-                    valid(inpTarget.target,8,inpTitle);
-                }
-                else if(inpTarget.target.id == "confirm-pasw"){
-                    let inpTitle = document.querySelector(".box__valid--con-pasw");
-                    valid(inpTarget.target,8,inpTitle);
-                }
-            },800)
+            onFocus(inpTarget.target);
         })
     })
+    inp.addEventListener("click", inpTarget => {
+        onFocus(inpTarget.target);
+    })
 })
+
+function onFocus(inpTarget){
+    setTimeout(()=> {
+        inpTarget.style.backgroundImage  = "url('../../img/eror-bg.png')";
+        inpTarget.style.borderColor = "red";
+
+        if(inpTarget.id == "fnmae"){
+            let fnameTitle = document.querySelector(".box__valid-fnmae");
+            valid(inpTarget,5,fnameTitle);
+        }
+        else if(inpTarget.id == "lnmae"){
+            let lnameTitle = document.querySelector(".box__valid-lname");
+            valid(inpTarget,6,lnameTitle);
+        }
+        else if(inpTarget.id == "age"){
+            let ageTitle = document.querySelector(".box__valid--age");
+            valid(inpTarget,2,ageTitle);
+        }
+        else if(inpTarget.id == "pasw"){
+            let inpTitle = document.querySelector(".box__valid--pasw");
+            valid(inpTarget,8,inpTitle);
+        }
+        else if(inpTarget.id == "confirm-pasw"){
+            let inpTitle = document.querySelector(".box__valid--con-pasw");
+            valid(inpTarget,8,inpTitle);
+        }
+    },800)
+}
 
 function valid(targetInp,valLength,inpBottomTitle){
     inpBottomTitle.style.opacity = "1";
