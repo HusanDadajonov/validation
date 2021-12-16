@@ -37,40 +37,43 @@ document.querySelector(".box__form").addEventListener("submit", e => {
 document.querySelectorAll(".box__inp").forEach(inp => {
     inp.addEventListener("focus", inpTarget => {
         inpTarget.target.addEventListener("keyup", item => {    
-            onFocus(inpTarget.target);
+            if(inpTarget.target.value != ""){
+                onFocus(inpTarget.target);
+            }
         })
     })
+    
     inp.addEventListener("click", inpTarget => {
-        onFocus(inpTarget.target);
+        inpTarget.target.addEventListener("keyup", item => {    
+            onFocus(inpTarget.target);
+        })
     })
 })
 
 function onFocus(inpTarget){
-    setTimeout(()=> {
-        inpTarget.style.backgroundImage  = "url('../../img/eror-bg.png')";
-        inpTarget.style.borderColor = "red";
+    inpTarget.style.backgroundImage  = "url('../../img/eror-bg.png')";
+    inpTarget.style.borderColor = "red";
 
-        if(inpTarget.id == "fnmae"){
-            let fnameTitle = document.querySelector(".box__valid-fnmae");
-            valid(inpTarget,5,fnameTitle);
-        }
-        else if(inpTarget.id == "lnmae"){
-            let lnameTitle = document.querySelector(".box__valid-lname");
-            valid(inpTarget,6,lnameTitle);
-        }
-        else if(inpTarget.id == "age"){
-            let ageTitle = document.querySelector(".box__valid--age");
-            valid(inpTarget,2,ageTitle);
-        }
-        else if(inpTarget.id == "pasw"){
-            let inpTitle = document.querySelector(".box__valid--pasw");
-            valid(inpTarget,8,inpTitle);
-        }
-        else if(inpTarget.id == "confirm-pasw"){
-            let inpTitle = document.querySelector(".box__valid--con-pasw");
-            valid(inpTarget,8,inpTitle);
-        }
-    },800)
+    if(inpTarget.id == "fnmae"){
+        let fnameTitle = document.querySelector(".box__valid-fnmae");
+        valid(inpTarget,5,fnameTitle);
+    }
+    else if(inpTarget.id == "lnmae"){
+        let lnameTitle = document.querySelector(".box__valid-lname");
+        valid(inpTarget,6,lnameTitle);
+    }
+    else if(inpTarget.id == "age"){
+        let ageTitle = document.querySelector(".box__valid--age");
+        valid(inpTarget,2,ageTitle);
+    }
+    else if(inpTarget.id == "pasw"){
+        let inpTitle = document.querySelector(".box__valid--pasw");
+        valid(inpTarget,8,inpTitle);
+    }
+    else if(inpTarget.id == "confirm-pasw"){
+        let inpTitle = document.querySelector(".box__valid--con-pasw");
+        valid(inpTarget,8,inpTitle);
+    }
 }
 
 function valid(targetInp,valLength,inpBottomTitle){
